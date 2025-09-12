@@ -189,10 +189,10 @@
         /// Applies the specified amount of damage to the identified shipboard system.
         /// </summary>
         /// <param name="shipboardSystemType">The shipboard system to damage.</param>
-        /// <param name="amountOfDamage">The amount of damage to apply to the shipboard system. Negative amounts will be converted to positives.</param>
+        /// <param name="amountOfDamage">The amount of damage to apply to the shipboard system. Negative amounts will be ignored.</param>
         public void DamageShipboardSystemByStatedAmount(ShipboardSystemType shipboardSystemType, double amountOfDamage)
         {
-            ShipboardSystems.First(s => s.ShipboardSystemType.Equals(shipboardSystemType)).TakeDamageByStatedAmount(Math.Abs(amountOfDamage));
+            ShipboardSystems.First(s => s.ShipboardSystemType.Equals(shipboardSystemType)).TakeDamageByStatedAmount(amountOfDamage);
         }
 
         /// <summary>
@@ -245,31 +245,65 @@
             EnergyReserves -= energyToConsume;
         }
 
+        /// <summary>
+        /// Replenishes the starship's energy reserves to their maximum level.
+        /// </summary>
         public void ReplenishEnergyReserves()
+            // TODO: Replenish the energy reserves to the maximum level less any energy currently assigned to the shields
             => EnergyReserves = MaximumEnergyReserves;
 
+        /// <summary>
+        /// Replenishes the starship's photon torpedo complement to its maximum level.
+        /// </summary>
         public void ReplenishPhotonTorpedoes()
             => PhotonTorpedoesRemaining = MaximumPhotonTorpedoes;
 
+        /// <summary>
+        /// Checks if the starship's shields are considered to be dangerously low.
+        /// </summary>
+        /// <returns>True if the shield energy is below the configured amount, false if not.</returns>
         public bool IsShieldEnergyDangerouslyLow()
             => ShieldEnergy <= LowShieldEnergyLevel;
 
+        /// <summary>
+        /// Checks if there are active Klingon battle cruisers in the same quadrant as the starship.
+        /// </summary>
+        /// <param name="klingonBattleCruisers">The full list of Klingon battle cruisers in the galaxy.</param>
+        /// <returns>True if there are any active Klingon battle cruisers in the starship's current quadrant, false if the quadrant contains none or no active ones.</returns>
         public bool ActiveKlingonBattleCruisersAreInQuadrant(List<KlingonBattleCruiser> klingonBattleCruisers)
-            => klingonBattleCruisers.Any(k => k.QuadrantCoordinate.Equals(QuadrantCoordinate) && k.IsActive);
+            => klingonBattleCruisers.Any(k => k.QuadrantCoordinate.Matches(QuadrantCoordinate) && k.IsActive);
 
+        /// <summary>
+        /// Checks if a photon torpedo has moved into the same quadrant/sector as a star, which will absorb the torpedo.
+        /// </summary>
+        /// <param name="stars">The full list of stars in the galaxy.</param>
+        /// <param name="sector">The quadrant sector the photon torpedo is in.</param>
+        /// <returns>True if the star's sector in the quadrant matches the photon torpedo's, false if not.</returns>
         private bool PhotonTorpedoWasAbsorbedByStar(List<Star> stars, Coordinate sector)
         {
-            return stars.Any(s => s.QuadrantCoordinate.Equals(QuadrantCoordinate) && s.SectorCoordinate.Equals(sector));
+            return stars.Any(s => s.QuadrantCoordinate.Matches(QuadrantCoordinate) && s.SectorCoordinate.Matches(sector));
         }
 
+        /// <summary>
+        /// Checks if a photon torpedo has moved into the same quadrant/sector as a Federation starbase, which will destroy the starbase.
+        /// </summary>
+        /// <param name="federationStarbases">The full list of Federation starbases in the galaxy.</param>
+        /// <param name="sector">The quadrant sector the photon torpedo is in.</param>
+        /// <returns>True if the Federation starbase's sector in the quadrant matches the photon torpedo's, false if not.</returns>
         private bool PhotonTorpedoDestroyedFederationStarbase(List<FederationStarbase> federationStarbases, Coordinate sector)
         {
-            return federationStarbases.Any(s => s.QuadrantCoordinate.Equals(QuadrantCoordinate) && s.SectorCoordinate.Equals(sector));
+            return federationStarbases.Any(s => s.QuadrantCoordinate.Matches(QuadrantCoordinate) && s.SectorCoordinate.Matches(sector));
         }
 
+        /// <summary>
+        /// Checks if a photon torpedo has moved into the same quadrant/sector as a Klingon battle cruiser, which will destroy the battle cruiser.
+        /// </summary>
+        /// <param name="klingonBattleCruisers">The full list of Klingon battle cruisers in the galaxy.</param>
+        /// <param name="sector">The quadrant sector the photon torpedo is in.</param>
+        /// <returns>True if the Klingon battle cruiser's sector in the quadrant matches the photon torpedo's, false if not.</returns>
         private bool PhotonTorpedoDestroyedKlingonBattleCruiser(List<KlingonBattleCruiser> klingonBattleCruisers, Coordinate sector)
         {
-            return klingonBattleCruisers.Any(k => k.QuadrantCoordinate.Equals(QuadrantCoordinate) && k.SectorCoordinate.Equals(sector));
+            return klingonBattleCruisers.Any(k => k.QuadrantCoordinate.Matches(QuadrantCoordinate) && k.SectorCoordinate.Matches(sector));
         }
 
         public PhotonTorpedoFiringResult OutcomeOfFiringPhotonTorpedo(double firingCourse, List<KlingonBattleCruiser> klingonBattleCruisers, List<FederationStarbase> federationStarbases, List<Star> stars)
@@ -304,7 +338,7 @@
 
                 if (PhotonTorpedoDestroyedFederationStarbase(federationStarbases, sector))
                 {
-                    // Deactivate federation starbase
+                    // Deactivate the Federation starbase
                     // Remove from sector
                     firingResult.Outcome = PhotonTorpedoFiringOutcome.DestroyedFederationStarbase;
                     firingResult.ImpactCoordinate = sector;

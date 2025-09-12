@@ -9,5 +9,16 @@
     {
         public int x = xAxis;
         public int y = yAxis;
+
+        /// <summary>
+        /// Evaluates if two coordinates have the same x/y values.
+        /// </summary>
+        /// <param name="coordinateToCompareTo">The Coordinate to compare this one to.</param>
+        /// <returns>True if their x/y values match, false if they don't.</returns>
+        public readonly bool Matches(Coordinate coordinateToCompareTo)
+        {
+            return (x == coordinateToCompareTo.x
+                && y == coordinateToCompareTo.y);
+        }
     }
 }
