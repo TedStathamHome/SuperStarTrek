@@ -306,6 +306,14 @@
             return klingonBattleCruisers.Any(k => k.QuadrantCoordinate.Matches(QuadrantCoordinate) && k.SectorCoordinate.Matches(sector));
         }
 
+        /// <summary>
+        /// Determines the outcome of firing a photon torpedo along a defined course. 
+        /// </summary>
+        /// <param name="firingCourse">The navigational course to fire the photon torpedo along.</param>
+        /// <param name="klingonBattleCruisers">The list of Klingon battle cruisers in the galaxy.</param>
+        /// <param name="federationStarbases">The list of Federation starbases in the galaxy.</param>
+        /// <param name="stars">The list of stars in the galaxy.</param>
+        /// <returns>A PhotoTorpedoFiringResult, which contains the course, outcome, and the coordinate within the sector of what it impacted, if anything.</returns>
         public PhotonTorpedoFiringResult OutcomeOfFiringPhotonTorpedo(double firingCourse, List<KlingonBattleCruiser> klingonBattleCruisers, List<FederationStarbase> federationStarbases, List<Star> stars)
         {
             const int energyReservesRequiredToFirePhotonTorpedo = 2;
@@ -320,9 +328,9 @@
 
             // If there's nothing in the quadrant to hit, return.
             // The photon torpedo was wasted.
-            if (klingonBattleCruisers.Count == 0 &&
-                federationStarbases.Count == 0 &&
-                stars.Count == 0)
+            if (!(klingonBattleCruisers.Any(k => k.QuadrantCoordinate.Matches(QuadrantCoordinate) && k.IsActive) ||
+                federationStarbases.Any(b => b.QuadrantCoordinate.Matches(QuadrantCoordinate) && b.IsActive) ||
+                stars.Any(s => s.QuadrantCoordinate.Matches(QuadrantCoordinate))))
             {
                 return firingResult;
             }
@@ -358,6 +366,16 @@
             return firingResult;
         }
 
+        /// <summary>
+        /// Attempts to fire a photon torpedo along a defined course. If there are no
+        /// photon torpedoes, the photon torpedo tubes are damaged, or insufficient
+        /// energy to fire one, this will fail.
+        /// </summary>
+        /// <param name="firingCourse">The navigational course to fire the photon torpedo along.</param>
+        /// <param name="klingonBattleCruisers">The list of Klingon battle cruisers in the galaxy.</param>
+        /// <param name="federationStarbases">The list of Federation starbases in the galaxy.</param>
+        /// <param name="stars">The list of stars in the galaxy.</param>
+        /// <returns>A PhotonTorpedoFiringResult, which contains the course, outcome, and the coordinate within the sector of what it impacted, if anything.</returns>
         public PhotonTorpedoFiringResult FirePhotonTorpedo(double firingCourse, List<KlingonBattleCruiser> klingonBattleCruisers, List<FederationStarbase> federationStarbases, List<Star> stars)
         {
             const int energyReservesRequiredToFirePhotonTorpedo = 2;

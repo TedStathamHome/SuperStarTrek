@@ -1,30 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameObjects
+﻿namespace GameObjects
 {
+    /// <summary>
+    /// Defines the galaxy that the game occurs within.
+    /// </summary>
     public class Galaxy
     {
+        /// <summary>
+        /// Constructs the galaxy for the game.
+        /// </summary>
         public Galaxy()
         {
             InitializeQuadrants();
         }
 
+        /// <summary>
+        /// The galaxy is considered to be a square of quadrants of this width and height.
+        /// </summary>
         private const int GalaxyWidthHeight = 8;
 
+        /// <summary>
+        /// The square grid of Quadrants in the galaxy.
+        /// </summary>
         public Quadrant[,] Quadrants { get; set; } = new Quadrant[GalaxyWidthHeight, GalaxyWidthHeight];
 
-        public List<Star> Stars { get; set; } = new List<Star>();
+        /// <summary>
+        /// The list of stars populating the galaxy.
+        /// </summary>
+        public List<Star> Stars { get; set; } = [];
 
-        public List<FederationStarbase> FederationStarbases { get; set; } = new List<FederationStarbase>();
+        /// <summary>
+        /// The list of Federation starbases in the galaxy.
+        /// </summary>
+        public List<FederationStarbase> FederationStarbases { get; set; } = [];
 
-        public List<KlingonBattleCruiser> KlingonBattleCruisers { get; set; } = new List<KlingonBattleCruiser>();
+        /// <summary>
+        /// The list of Klingon battle cruisers in the galaxy.
+        /// </summary>
+        public List<KlingonBattleCruiser> KlingonBattleCruisers { get; set; } = [];
 
-        public FederationStarship UssEnterprise { get; set; }
+        /// <summary>
+        /// The Federation starship USS Enterprise within the galaxy.
+        /// </summary>
+        public FederationStarship? UssEnterprise { get; set; }
 
+        /// <summary>
+        /// Initializes the Quadrants of the galaxy.
+        /// </summary>
         internal void InitializeQuadrants()
         {
             for (int i = 0; i < GalaxyWidthHeight; i++)
