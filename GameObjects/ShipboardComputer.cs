@@ -1,12 +1,23 @@
 ﻿namespace GameObjects
 {
+    /// <summary>
+    /// Encapsulates the various functions of a Federation starship's shipboard
+    /// computer, such as calculating navigation trajectories, performing long-
+    /// and short-range sensor scans, and so forth.
+    /// </summary>
     public class ShipboardComputer
     {
+        /// <summary>
+        /// Constructs the shipboard computer.
+        /// </summary>
         public ShipboardComputer()
         {
             
         }
 
+        /// <summary>
+        /// An array of trajectory changes for the 8 cardinal directions.
+        /// </summary>
         // The course trajectory grid looks like the following:
         // ┌───┬───┬───┐
         // │ 4 │ 3 │ 2 │
@@ -33,19 +44,32 @@
             { 1, 0 }            // course 9, same as course 1
         };
 
+        /// <summary>
+        /// Calculates the distance between two coordinates. This applies both 
+        /// for Sector and Quadrant coordinates. It uses the Pythagorean formula 
+        /// (c² = a² + b²) to determine the distance between two coordinates, 
+        /// taking the square root of c².
+        /// </summary>
+        /// <param name="startingCoordinate">The Coordinate to start from.</param>
+        /// <param name="endingCoordinate">The Coordinate to end at.</param>
+        /// <returns>A double representing the distance between the two coordinates.</returns>
         public static double DistanceBetweenCoordinates(Coordinate startingCoordinate, Coordinate endingCoordinate)
-            // Uses the Pythagorean formula (c² = a² + b²) to determine the distance between two
-            // coordinates, taking the square reoot of c² in the formula below.
             => Math.Sqrt(
                 Math.Pow(startingCoordinate.x - endingCoordinate.x, 2) +
                 Math.Pow(startingCoordinate.y - endingCoordinate.y, 2)
                 );
 
+        /// <summary>
+        /// Calculates the relative course adjustment on the vertical scale. 
+        /// </summary>
+        /// <param name="relativeXAxisDistance">The relative distance on the X-axis. Positive values indicate movement to the right, while negative values indicate movement to the left.</param>
+        /// <param name="relativeYAxisDistance">The relative distance on the Y-axis. Positive values indicate updwards movement, while negative values indicate downwards movement.</param>
+        /// <returns>The absolute vertical course adjustment, which is always a positive value.</returns>
         private static double CourseAdjustmentVertical(int relativeXAxisDistance, int relativeYAxisDistance)
         {
             double courseAdjustment;
 
-            // If the change in the x-axis is greater than the change in the y-axis,
+            // If the change in the X-axis is greater than the change in the Y-axis,
             // adjust the course by a fraction of a course point.
             if (Math.Abs(relativeXAxisDistance) > Math.Abs(relativeYAxisDistance))
             {
@@ -60,6 +84,12 @@
             return courseAdjustment;
         }
 
+        /// <summary>
+        /// Calculates the relative course adjustment on the horizontal scale.
+        /// </summary>
+        /// <param name="relativeXAxisDistance">The relative distance on the X-axis. Positive values indicate movement to the right, while negative values indicate movement to the left.</param>
+        /// <param name="relativeYAxisDistance">The relative distance on the Y-axis. Positive values indicate upwards movement, while negative values indicate downwards movement.</param>
+        /// <returns>The absolute horizontal course adjustment, which is always a positive value.</returns>
         private static double CourseAdjustmentHorizontal(int relativeXAxisDistance, int relativeYAxisDistance)
         {
             // This is just the inverse of the vertical calculation,
@@ -67,6 +97,12 @@
             return CourseAdjustmentVertical(relativeYAxisDistance, relativeXAxisDistance);
         }
 
+        /// <summary>
+        /// Calculates the course heading between two coordinates, for either Sectors or Quadrants.
+        /// </summary>
+        /// <param name="startingCoordinate">The coordinate to start from.</param>
+        /// <param name="endingCoordinate">The coordinate to end at.</param>
+        /// <returns>A course heading from 0.0 to 8.9999999~.</returns>
         public static double CourseBetweenCoordinates(Coordinate startingCoordinate, Coordinate endingCoordinate)
         {
             const double courseHeadingNoMovement = 0d;
@@ -116,6 +152,11 @@
             return courseToEndingCoordinate;
         }
 
+        /// <summary>
+        /// Calculates the trajectory based on the provided course. Trajectories are used for navigation, range finding, and the firing of weapons.
+        /// </summary>
+        /// <param name="course">The navigational course to use. This is a positive value between 0.0 and 8.99999~.</param>
+        /// <returns>A Trajectory</returns>
         public static Trajectory CalculateTrajectoryBasedOnCourse(double course)
         {
             const double lowestCourse = 1;
@@ -141,6 +182,15 @@
             return trajectory;
         }
 
+        /// <summary>
+        /// Calculates a path through a galactic Quadrant's Sectors based on the 
+        /// provided navigational Trajectory. This does not take into account
+        /// anything that might be along that path, such as stars, Federation
+        /// starbases, or Klingon battle cruisers.
+        /// </summary>
+        /// <param name="startingCoordinate">The starting Sector coordinate within the galactic Quadrant.</param>
+        /// <param name="trajectory">The navigational Trajectory to travel along.</param>
+        /// <returns>A list of Sector Coordinates travelled through within the galactic Quadrant.</returns>
         public static List<Coordinate> CalculateSectorPathBasedOnTrajectory(Coordinate startingCoordinate, Trajectory trajectory)
         {
             const int minimumSectorNumber = 0;
