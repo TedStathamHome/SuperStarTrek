@@ -41,7 +41,7 @@
         /// <summary>
         /// The Federation starship USS Enterprise within the galaxy.
         /// </summary>
-        public FederationStarship? UssEnterprise { get; set; }
+        public FederationStarship UssEnterprise { get; set; }
 
         /// <summary>
         /// Initializes the Quadrants of the galaxy.
