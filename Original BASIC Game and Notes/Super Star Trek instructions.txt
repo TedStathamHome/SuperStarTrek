@@ -1,0 +1,141 @@
+                     ╔════════════════════════════════════╗
+                     ║                                    ║
+                     ║                                    ║
+                     ║      ░▒▓ Super Star Trek™ ▓▒░      ║
+                     ║                                    ║
+                     ║                                    ║
+                     ╚════════════════════════════════════╝
+
+░▒▓ I N S T R U C T I O N S ███████████████████████████████████████████████████
+
+1. When the "Command" buttons are displayed on the screen, click one of them:
+                 NAV   SRS   LRS   PHA   TOR   SHE   DAM   COM
+
+2. Some commands require you to enter more information. For example, the NAV
+   command displays a prompt of "Course (1-9)?" If you enter invalid values,
+   like negative numbers, the command is rejected and you can click another.
+
+The galaxy is divided into an 8 x 8 grid of quadrants, and each quadrant is
+sub-divided into an 8 x 8 grid of sectors. Both grids are laid out as follows:
+
+            ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┐
+       ▲  8 │ 1, 8 │ 2, 8 │ 3, 8 │ 4, 8 │ 5, 8 │ 6, 8 │ 7, 8 │ 8, 8 │
+       │    ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
+       │  7 │ 1, 7 │ 2, 7 │ 3, 7 │ 4, 7 │ 5, 7 │ 6, 7 │ 7, 7 │ 8, 7 │
+            ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
+       Y  6 │ 1, 6 │ 2, 6 │ 3, 6 │ 4, 6 │ 5, 6 │ 6, 6 │ 7, 6 │ 8, 6 │
+            ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
+       A  5 │ 1, 5 │ 2, 5 │ 3, 5 │ 4, 5 │ 5, 5 │ 6, 5 │ 7, 5 │ 8, 5 │
+       x    ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
+       i  4 │ 1, 4 │ 2, 4 │ 3, 4 │ 4, 4 │ 5, 4 │ 6, 4 │ 7, 4 │ 8, 4 │
+       s    ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
+          3 │ 1, 3 │ 2, 3 │ 3, 3 │ 4, 3 │ 5, 3 │ 6, 3 │ 7, 3 │ 8, 3 │
+       │    ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
+       │  2 │ 1, 2 │ 2, 2 │ 3, 2 │ 4, 2 │ 5, 2 │ 6, 2 │ 7, 2 │ 8, 2 │
+       │    ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
+       ▼  1 │ 1, 1 │ 2, 1 │ 3, 1 │ 4, 1 │ 5, 1 │ 6, 1 │ 7, 1 │ 8, 1 │
+            └──────┴──────┴──────┴──────┴──────┴──────┴──────┴──────┘
+                1      2      3      4      5      6      7      8
+             ◄─────────────────────── X Axis ──────────────────────►
+
+Coordinates are entered as the X axis followed by the Y axis, for example 5, 3.
+
+
+░▒▓ Y O U R   M I S S I O N ███████████████████████████████████████████████████
+
+Your tour of duty as the Commander of the USS Enterprise™ starts in a random
+sector and quadrant of the galaxy, which is populated with a varying number of
+stars, Federation Starbases, and Klingon Battle Cruisers. Note that many
+actions rely on and gradually deplete the available energy reserves of the USS
+Enterprise™. If there is insufficient available energy to carry out a command,
+it will not be carried out. Docking at a Federation Starbase replenishes your
+ship's energy reserves and its complement of photon torpedoes. While docked,
+you are protected from enemy assault by the Starbase's shields, and can conduct
+complete repairs of all damaged systems on the USS Enterprise™.
+
+To win, seek out and destroy the hostile fleet of Klingon Battle Cruisers which
+are menacing the worlds of the United Federation of Planets.
+
+
+░▒▓ C O N T R O L S ███████████████████████████████████████████████████████████
+
+Control the fate of the USS Enterprise™ using the following command buttons:
+
+NAV - Controls the warp engines. You must provide both the       4  3  2
+      course and the warp factor. The course is a circular        ╲ │ ╱
+      vector arrangement as shown to the right. Fractional         ╲│╱
+      values may be used. For example, a course of 1.5 is      5 ───╳─── 1
+      halfway between courses 1 and 2. Values may approach         ╱│╲
+      9.0, which is treated as 1.0.                               ╱ │ ╲
+                                                                 6  7  8
+      Each warp factor is the size of one quadrant, and may
+      also be entered with fractional values. Thus, to get from quadrant 6, 5
+      to quadrant 5, 5 requires a course of 5 at a warp factor of 1.
+
+SRS - Performs a short range sensor scan of the quadrant the USS Enterprise™
+      is in. A condensed status report is also displayed.
+      The symbols on the sensor scan are as follows:
+          ¡♀¡ → The USS Enterprise™
+          ╭ʘ╮ → Klingon Battle Cruiser
+          ›‖‹ → Federation Starbase
+           ☼  → Star
+
+LRS - Performs a long range sensor scan of the quadrants surrounding the one
+      the USS Enterprise™ is in. The scan results are coded as a three digit
+      number in the form of "KBS", where K indicates the number of Klingon
+      Battle Cruisers, B indicates the number of Federation Starbases, and
+      S indicates the number of stars. For example, if a quadrant shows "207",
+      this indicates there are two Klingon Battle Cruisers, no Federation
+      Starbases, and seven stars within it. If the USS Enterprise™ is in a
+      quadrant at the very edge of the galaxy, "•••" is displayed for the
+      quadrants beyond.
+
+PHA - Controls the phaser array, which allows you to destroy Klingon Battle
+      Cruisers by depleting their shields. You must specify the amount of
+      ship's energy to expend, and that energy is split evenly amongst the
+      Klingon Battle Cruisers present in the quadrant.
+
+TOR - Controls the photon torpedoes. You must provide the course to fire the
+      torpedo in, which is specified the same way as warp engine control. If
+      one hits a Klingon Battle Cruiser, they are destroyed. If it misses, you
+      are subject to their phaser fire. In either case, you are also subject
+      to the phaser fire of any other Klingon Battle Cruisers in the quadrant.
+      Note that the shipboard computer of the USS Enterprise™ (with the COM
+      command) has an option to calculate the photon torpedo trajectories for
+      all of the Klingon Battle Cruisers in the quadrant (option 2).
+
+SHE - Controls the shield generators. You must specify the amount of energy to
+      assign to the shields, which is taken from the total available ship's
+      energy. Note that the status display for total energy includes any energy
+      already assigned to the shields.
+
+DAM - Generates a damage control report for the USS Enterprise™. The report
+      lists the damage status of all of the ship's systems. A negative value
+      indicates that a system is temporarily damaged. Note that damaged
+      systems will either not work or may work in a degraded manner. Damaged
+      ship's systems are repaired randomly during navigation, and all systems
+      can be repaired at once while docked at a Federation Starbase.
+
+COM - Accesses the shipboard computer and its library. It has six options:
+      1 - Displays the cumulative galactic record. This shows the computer's
+          memory of the results of all previous short and long range sensor
+          scans combined into a single galactic map. Quadrants that have never
+          been scanned before show "•••" instead of the trio of digits
+          displayed in a long range scan.
+      2 - Displays a mission status report. This shows the number of Klingon
+          Battle Cruisers, stardates, and Federation Starbases remaining in the
+          mission.
+      3 - Displays photon torpedo information. This shows the course and
+          distance from the USS Enterprise™ to all of the Klingon Battle
+          Cruisers in the quadrant.
+      4 - Displays Federation Starbase navigation information. This shows the
+          course and distance from the USS Enterprise™ to all of the Federation
+          Starbases in the quadrant.
+      5 - Runs the course/distance calculator program. This allows you to
+          enter starting and ending galactic quadrant coordinates, to which it
+          provides the course and distance, which equates to the warp factor
+          required to travel between the start and end coordinates.
+      6 - Displays a galactic quadrant map with region names, which are
+          referred to in the game play.
+
+░▒▓████████████████████████████████████████████████████████████████████████████

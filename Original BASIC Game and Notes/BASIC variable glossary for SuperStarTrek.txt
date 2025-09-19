@@ -1,0 +1,86 @@
+BASIC variable glossary for SuperStarTrek ()
+=========================================
+Notes:
+- Grid has x-axis on vertical; y-axis on horizontal; from bottom left
+- Many variables are used for multiple purposes; where possible, separated by semicolons
+
+Arrays:
+=======
+- C(9,2)      array of navigational directions; one for each direction, two sub-dimensions indicating vertical and horizontal change, respectively
+- D(8)        array of damage levels of each shipboard system; one for each system; zero value is no damage
+- G(8,8)      array of galactic quadrant statuses; 8 rows with 8 columns
+- K(3,3)      array of Klingon battle cruiser details in current quadrants; sub-dimension is x/y axes and energy level
+- N(3)        array of quadrants of the current row of the long-range scan; left to right
+- Z(8,8)      array of currently scanned quadrant statuses; 8 rows with 8 columns
+
+Strings:
+========
+- A1$         allowed game commands, 3 characters each
+- A$          sector object string for starships, starbases, battle cruisers, stars and empty space; yes/no response for damage repairs
+- C$          situation status (green/yellow/red)
+- G2$         name of quadrant (with or without its number); name of shipboard system repaired/damaged
+- O1$         string of dashes for long/short-range scans
+- X$          plural modifier for various strings; empty when single, "s" when multiples; current maximum warp factor
+- X0$         plural indicator for various strings; "is" when single, "are" when multiples
+- Z$          25 spaces
+
+Numbers (can be integer or floating point, and can change type)
+=======
+- A           library computer command entered by the player (0 to 5); negatives return player to main selection; USS Enterprise's current y coordinate (from S2)
+- B3          number of active Federation starbases in the current sector
+- B4          current sector x position the Federation starbase is located at
+- B5          current sector y position the Federation starbase is located at
+- B9          remaining number of Federation starbases in the galaxy
+- C1          course entered by player for navigation or photon torpedoes; USS Enterprise's current x coordinate (from S1)
+- D0          docking status flag of the USS Enterprise (0 = not docked, 1 = docked)
+- D1          damage taken flag from Klingon battle cruisers firing on the Enterprise when it moves in the same quadrant
+- D3          time estimate to repair all damaged shipboard systems
+- D4          random number of time spent on repairs in current cycle
+- D6          the amount of damage repair to effect while under warp, to a maximum of 1
+- E           current energy level for running shields and phasers
+- E0          maximum energy level for running shields and phasers
+- G5          number to indicate to display the quadrant number with its name (for subroutine)
+- H           amount of potential damage to a Klingon battle cruiser/USS Enterprise based on the phaser energy applied
+- H1          even split of phaser energy across all the Klingon battle cruisers in the current quadrant
+- H8          flag indicating which map to display; 0 = galactic quadrant map; 1 = sector map of current quadrant
+- I           generic counter
+- J           generic counter
+- J0          number of tabs to put in front of the galactic region name
+- K3          number of active Klingon battle cruisers in the quadrant
+- K7          number of Klingon battle cruisers in the galaxy we started with
+- K9          remaining number of Klingon battle cruisers in the galaxy
+- L           generic counter
+- N           temp variable for energy requirements for warp travel
+- P           current number of photon torpedoes
+- P0          maximum number of photon torpedoes
+- Q1          current quadrant x position the USS Enterprise is located in
+- Q2          current quadrant y position the USS Enterprise is located in
+- Q4          current quadrant x position the USS Enterprise (from Q1)
+- Q5          current quadrant y position the USS Enterprise (from Q2)
+- R1          temp variable for random number generation during galaxy population, random sector x selection, random system selection
+- R2          temp variable for random sector y selection
+- S           current energy level assigned to shields
+- S1          current sector x position the USS Entrprise is located in
+- S2          current sector y position the USS Enterprise is located in
+- S3          number of stars in the galaxy
+- S8          sector object position within the overall quadrant map's string, to determine what's in a sector
+- S9          maximum shield energy level of Klingon battle cruisers
+- T           current stardate
+- T0          starting stardate
+- T8          maximum amount of time elapsed during starship navigation (if warp factor > 1)
+- T9          number of stardates to complete mission within
+- W1          warp factor requested by player; Klingon battle cruiser x coordinate
+- X           current quadrant sector x position of USS Enterprise (from S1) or Klingon battle cruiser (from K(i, 2)); energy requested for phaser firing or shield control
+- X1          y-axis change in trajectory for USS Enterprise
+- X2          x-axis change in trajectory for USS Enterprise
+- X5          flag indicating if the galactic perimeter is being crossed
+- Y           current quadrant sector y position of USS Enterprise (from S2)
+- Z1          copy of current sector x position the USS Entrprise or star is located in (for subroutine)
+- Z2          copy of current sector y position the USS Enterprise or star is located in (for subroutine)
+- Z4          current quadrant x position of the USS Enterprise; galactic region name selector
+- Z5          current quadrant x position of the USS Enterprise; left/right-hand galactic region name selector
+
+User-defined Functions
+======================
+- FND(D)      distance between Klingon battle cruiser and USS Enterprise
+- FNR(R)      random double between 1 and 8
