@@ -43,6 +43,8 @@
         /// </summary>
         public FederationStarship UssEnterprise { get; set; } = new(new Coordinate(0, 0), new Coordinate(0, 0));
 
+        public ActivityLog ActivityLog { get; set; } = new();
+
         /// <summary>
         /// Initializes the Quadrants of the galaxy.
         /// </summary>

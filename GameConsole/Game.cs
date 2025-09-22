@@ -1,4 +1,5 @@
 ﻿using GameObjects;
+using System.Runtime.CompilerServices;
 
 namespace GameConsole
 {
@@ -12,33 +13,34 @@ namespace GameConsole
         /// <summary>
         /// The Galaxy that the game is played within.
         /// </summary>
-        private Galaxy Galaxy = new();
+        private static Galaxy Galaxy = new();
 
         /// <summary>
         /// The stardate the mission begins on.
         /// </summary>
-        private int StartingStardate;
+        private static int StartingStardate;
 
         /// <summary>
         /// How many stardates the player has to complete the mission.
         /// </summary>
-        private int StardatesToCompleteMissionIn;
+        private static int StardatesToCompleteMissionIn;
 
         /// <summary>
         /// What the current stardate is within the mission.
         /// </summary>
-        private double CurrentStardate;
+        private static double CurrentStardate;
 
         public static void Main()
         {
-            
+            Start();
         }
 
-        public void Start()
+        public static void Start()
         {
             Galaxy = new Galaxy();
             PopulateGalaxy();
             InitializeMissionParameters();
+            PlayTheGame();
         }
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace GameConsole
         /// along with random amounts of stars, Klingon battle cruisers, and
         /// Federation starbases.
         /// </summary>
-        private void PopulateGalaxy()
+        private static void PopulateGalaxy()
         {
             PlaceTheUssEnterprise();
 
@@ -76,7 +78,7 @@ namespace GameConsole
         /// <summary>
         /// Sets out the mission parameters for the game.
         /// </summary>
-        private void InitializeMissionParameters()
+        private static void InitializeMissionParameters()
         {
             const double baseMillenium = 20d;
             const double milleniumAdjustment = 20d;
@@ -94,6 +96,37 @@ namespace GameConsole
             }
         }
 
+        private static void PlayTheGame()
+        {
+            Galaxy.ActivityLog.Add(
+                "                                    ,------*------,\r\n" +
+                "                    ,-------------   '---  ------'\r\n" +
+                "                     '-------- --'      / /\r\n" +
+                "                         ,---' '-------/ /--,\r\n" +
+                "                          '----------------'\r\n" +
+                "\r\n" +
+                "                    The USS Enterprise --- NCC-1701\r\n" +
+                "\r\n");
+
+            Galaxy.ActivityLog.Add(
+                $"Your orders from Federation Command are as follows:\r\n" +
+                $"     Destroy the {Galaxy.KlingonBattleCruisers.Count:N0} Klingon warships which have invaded\r\n" +
+                $"   the galaxy before they can attack Federation Headquarters\r\n" +
+                $"   on Stardate {StartingStardate + StardatesToCompleteMissionIn:0000}. " +
+                $"This gives you {StardatesToCompleteMissionIn:N0} days. There {(Galaxy.FederationStarbases.Count > 1 ? "are" : "is")}\r\n" +
+                $"   {Galaxy.FederationStarbases.Count:N0} starbase{(Galaxy.FederationStarbases.Count > 1 ? "s" : "")} "+
+                $"in the galaxy for resupplying your ship.\r\n");
+
+            Galaxy.ActivityLog.Display();
+
+            // Prompt and wait for input to start game
+
+            Galaxy.ActivityLog.Add("Your mission begins with your starship located\r\n" +
+                $"in the galactic quadrant of {Quadrant.QuadrantName(Galaxy.UssEnterprise.QuadrantCoordinate, addQuadrantNumber: true)}.\r\n");
+
+            Galaxy.ActivityLog.Display();
+        }
+
         /// <summary>
         /// Calculates a random coordinate for placing objects in the galaxy's Quadrants and Sectors.
         /// </summary>
@@ -106,7 +139,7 @@ namespace GameConsole
         /// <summary>
         /// Places the USS Enterprise at a random Quadrant and Sector.
         /// </summary>
-        private void PlaceTheUssEnterprise()
+        private static void PlaceTheUssEnterprise()
         {
             Galaxy.UssEnterprise = new(RandomCoordinate(), RandomCoordinate());
 
@@ -119,7 +152,7 @@ namespace GameConsole
         /// <param name="sectorObject">What kind of object to place.</param>
         /// <param name="quadrantCoordinate">The galactic Quadrant to place the object in.</param>
         /// <param name="sectorCoordinate">The Sector within the galactic Quadrant to place the object in.</param>
-        private void PlaceSectorObjectInGalaxy(SectorObject sectorObject, Coordinate quadrantCoordinate, Coordinate sectorCoordinate)
+        private static void PlaceSectorObjectInGalaxy(SectorObject sectorObject, Coordinate quadrantCoordinate, Coordinate sectorCoordinate)
         {
             Galaxy
                 .Quadrants[quadrantCoordinate.x, quadrantCoordinate.y]
@@ -167,7 +200,7 @@ namespace GameConsole
         /// </summary>
         /// <param name="quadrantCoordinate">The galactic Quadrant to find an empty Sector within.</param>
         /// <returns>The coordinate of an empty Sector within the identified galactic Quadrant.</returns>
-        private Coordinate FindAnEmptySectorInQuadrant(Coordinate quadrantCoordinate)
+        private static Coordinate FindAnEmptySectorInQuadrant(Coordinate quadrantCoordinate)
         {
             var sectorToCheck = RandomCoordinate();
 
@@ -193,7 +226,7 @@ namespace GameConsole
         /// </summary>
         /// <param name="quadrantCoordinate">The galactic Quadrant to place the Klingon battle cruisers in.</param>
         /// <param name="klingonBattleCruisersToPlace">The number of Klingon battle cruisers to place in the galactic Quadrant.</param>
-        private void PlaceKlingonBattleCruisersInQuadrant(Coordinate quadrantCoordinate, int klingonBattleCruisersToPlace)
+        private static void PlaceKlingonBattleCruisersInQuadrant(Coordinate quadrantCoordinate, int klingonBattleCruisersToPlace)
         {
             if (klingonBattleCruisersToPlace > 0)
             {
@@ -217,7 +250,7 @@ namespace GameConsole
         /// </summary>
         /// <param name="quadrantCoordinate">The galactic Quadrant to place the Federation starbases in.</param>
         /// <param name="federationStarbasesToPlace">The number of Federation starbases to place in the galactic Quadrant.</param>
-        private void PlaceFederationStarbasesInQuadrant(Coordinate quadrantCoordinate, int federationStarbasesToPlace)
+        private static void PlaceFederationStarbasesInQuadrant(Coordinate quadrantCoordinate, int federationStarbasesToPlace)
         {
             if (federationStarbasesToPlace > 0)
             {
@@ -240,7 +273,7 @@ namespace GameConsole
         /// If it had to add more Federation starbases, it moves the USS
         /// Enterprise to a random galactic Quadrant and Sector.
         /// </summary>
-        private void AddFederationStarbasesIfNoneInGalaxy()
+        private static void AddFederationStarbasesIfNoneInGalaxy()
         {
             if (Galaxy.FederationStarbases.Count == 0)
             {
@@ -268,7 +301,7 @@ namespace GameConsole
         /// </summary>
         /// <param name="quadrantCoordinate">The galactic Quadrant to place the Stars in.</param>
         /// <param name="starsToPlace">The number of Stars to place in the galactic Quadrant.</param>
-        private void PlaceStarsInQuadrant(Coordinate quadrantCoordinate, int starsToPlace)
+        private static void PlaceStarsInQuadrant(Coordinate quadrantCoordinate, int starsToPlace)
         {
             if (starsToPlace > 0)
             {
@@ -288,7 +321,7 @@ namespace GameConsole
         /// and if so, drops the shields and replenishes the Enterprise's
         /// energy reserves and complement of photon torpedoes.
         /// </summary>
-        private void DockTheEnterpriseIfNextToStarbase()
+        private static void DockTheEnterpriseIfNextToStarbase()
         {
             if (Galaxy.UssEnterprise.IsDocked(Galaxy))
             {
@@ -302,7 +335,7 @@ namespace GameConsole
         /// Advances the current stardate by the specified number of stardates.
         /// </summary>
         /// <param name="stardatesToAdvance">The number of stardates to advance the current stardate by. Negative amounts are ignored (no time travel allowed!).</param>
-        public void AdvanceTime(double stardatesToAdvance)
+        public static void AdvanceTime(double stardatesToAdvance)
         {
             CurrentStardate += stardatesToAdvance < 0 ? stardatesToAdvance : 0;
         }
