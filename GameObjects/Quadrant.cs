@@ -6,6 +6,34 @@
     public class Quadrant
     {
         /// <summary>
+        /// List of quadrant names.
+        /// </summary>
+        private static readonly string[] QuadrantNames = [
+            "Antares",
+            "Rigel",
+            "Procyon",
+            "Vega",
+            "Canopus",
+            "Altair",
+            "Sagittarius",
+            "Pollux",
+            "Sirius",
+            "Deneb",
+            "Capella",
+            "Betelgeuse",
+            "Aldebaran",
+            "Regulus",
+            "Arcturus",
+            "Spica"
+            ];
+
+        /// <summary>
+        /// List of quadrant numbers. These are based on the quadrant's Y-axis
+        /// number, and are duplicated to fit the 16 quadrant names.
+        /// </summary>
+        private static readonly string[] QuadrantNumbers = ["I", "II", "III", "IV", "I", "II", "III", "IV"];
+
+        /// <summary>
         /// Constructs the quadrant, initializing its sectors.
         /// </summary>
         public Quadrant()
@@ -95,6 +123,34 @@
                     Sectors[i, j] = new Sector();
                 }
             }
+        }
+
+        /// <summary>
+        /// Generates the name of the Quadrant, based on its galactic coordinate,
+        /// and appends the Quadrant's number if requested.
+        /// </summary>
+        /// <param name="quadrantCoordinate">The galactic coordinate of the Quadrant to determine the name for.</param>
+        /// <param name="addQuadrantNumber">Flag to indicate if the Quadrant's number should also be provided.</param>
+        /// <returns></returns>
+        public static string QuadrantName(Coordinate quadrantCoordinate, bool addQuadrantNumber = false)
+        {
+            string quadrantName;
+
+            if (quadrantCoordinate.y < (QuadrantWidthHeight / 2))
+            {
+                quadrantName = QuadrantNames[quadrantCoordinate.x];
+            }
+            else
+            {
+                quadrantName = QuadrantNames[quadrantCoordinate.x + QuadrantWidthHeight];
+            }
+
+            if (addQuadrantNumber)
+            {
+                quadrantName += $" {QuadrantNumbers[quadrantCoordinate.y]}";
+            }
+
+            return quadrantName;
         }
     }
 }
