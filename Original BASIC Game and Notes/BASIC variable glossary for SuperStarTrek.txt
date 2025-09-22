@@ -78,7 +78,7 @@ Numbers (can be integer or floating point, and can change type)
 - Z1          copy of current sector x position the USS Entrprise or star is located in (for subroutine)
 - Z2          copy of current sector y position the USS Enterprise or star is located in (for subroutine)
 - Z4          current quadrant x position of the USS Enterprise; galactic region name selector
-- Z5          current quadrant x position of the USS Enterprise; left/right-hand galactic region name selector
+- Z5          current quadrant y position of the USS Enterprise; left/right-hand galactic region name selector
 
 User-defined Functions
 ======================
