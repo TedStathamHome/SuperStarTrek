@@ -61,13 +61,13 @@ are menacing the worlds of the United Federation of Planets.
 
 Control the fate of the USS Enterprise™ using the following command buttons:
 
-NAV - Controls the warp engines. You must provide both the       4  3  2
-      course and the warp factor. The course is a circular        ╲ │ ╱
-      vector arrangement as shown to the right. Fractional         ╲│╱
+NAV - Controls the warp engines. You must provide both the     4    3    2
+      course and the warp factor. The course is a circular      ╲   │   ╱
+      vector arrangement as shown to the right. Fractional        ╲ │ ╱
       values may be used. For example, a course of 1.5 is      5 ───╳─── 1
-      halfway between courses 1 and 2. Values may approach         ╱│╲
-      9.0, which is treated as 1.0.                               ╱ │ ╲
-                                                                 6  7  8
+      halfway between courses 1 and 2. Values may approach        ╱ │ ╲
+      9.0, which is treated as 1.0.                             ╱   │   ╲
+                                                               6    7    8
       Each warp factor is the size of one quadrant, and may
       also be entered with fractional values. Thus, to get from quadrant 6, 5
       to quadrant 5, 5 requires a course of 5 at a warp factor of 1.
